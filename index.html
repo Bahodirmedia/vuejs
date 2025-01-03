@@ -9,14 +9,9 @@
 <body>
 
 	<div id="app">
-		<h1>String: {{ name }}</h1>
-		<h1>Sum: {{ 10 + 60 }}</h1>
-		<h1>Number: {{ number }}</h1>
-		<h1>Method: {{ sayHello() }}</h1>
-		<h1>If statement: {{ isOk ? 'I am Ok' : 'I am not Ok' }}</h1>
-		<h1>Functions: {{ string.split('').reverse().join('') }}</h1>
-		
-		<p>...</p>
+		<h2>
+			<a :href="url">Google ({{url}})</a>
+		</h2>
 	</div>
 
 	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
@@ -25,15 +20,7 @@
 		new Vue({
 			el: '#app',
 			data: {
-				name: 'Vue!',
-				number: 100,
-				isOk: false,
-				string: 'My name is Bahodir'
-			},
-			methods: {
-				sayHello: function() {
-					return 'I am function';
-				}
+				url: 'https://google.com',
 			}
 		})
 
