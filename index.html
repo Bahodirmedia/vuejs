@@ -9,16 +9,11 @@
 <body>
 
 	<div id="app">
-		<h2>Counter = {{ counter }}</h2>
-		
-		<button v-on:click="raiseCounter">Increment</button>
-		
-		<hr>
-		
-		<h2 v-on:mouseover="onHover">Counter 2 = {{ counter2 }}</h2>
-		
-		<button v-on:click="counter2++">Increment</button>
-		
+		<h2>{{ title }} = {{ counter }}</h2>
+
+		<button v-on:click="raiseCounter(5, 'Changed to 5', $event)">Increment to 5</button>
+		<button v-on:click="raiseCounter(10, 'Changed to 10', $event)">Increment to 10</button>
+
 	</div>
 
 	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
@@ -28,14 +23,19 @@
 			el: '#app',
 			data: {
 				counter: 0,
-				counter2: 0
+				title: 'Counter'
 			},
 			methods: {
-				raiseCounter: function() {
-					this.counter++;
-				},
-				onHover: function(event) {
-					event.target.style.color = 'red';
+				raiseCounter: function (num, str, event) {
+					this.counter += num;
+					this.title = str
+					
+					if (num === 5) {
+						event.target.style.color = 'blue';
+					} else if (num === 10) {
+						event.target.style.color = 'red';
+					}
+					
 				}
 			}
 		})
