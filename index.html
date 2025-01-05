@@ -10,21 +10,14 @@
 
 	<div id="app">
 		
-		<ul>
-			<li v-for="(person, index) of people">{{ index + 1}}. {{ person.name }} - <b>{{ person.age }}</b></li>
-		</ul>
+		<h2>Counter {{ counter }} \ {{ counter2 }}</h2>
+		<h3>Result: {{ result() }}</h3>
+		<h3>Computed result: {{ computedResult }}</h3>
 		
-		<hr>
-		
-		<ol>
-			<li v-for="num of 4">{{ num }}</li>
-		</ol>
-		
-		<hr>
-		
-		<ul>
-			<li v-for="(value, key, index) in person"><em>{{ index +1 }}</em> <b>{{ key }}</b>	{{ value }}</li>
-		</ul>
+		<button @click="add">Add</button>
+		<button @click="sub">Sub</button>
+		<button @click="counter2++">Add counter 2</button>
+		<button @click="counter2--">Sub counter 2</button>
 		
 	</div>
 
@@ -34,21 +27,30 @@
 		new Vue({
 			el: '#app',
 			data: {
-				people: [
-					{name: 'John Doe', age: 30},
-					{name: 'Max Leo', age: 25},
-					{name: 'Steve Smith', age: 21},
-					{name: 'Mary Johnson', age: 22}
-				],
-				person : {
-					name: 'John Doe',
-					age: 30,
-					job: 'Web Developer'
-				}
+				counter: 0,
+				counter2: 0,
+				condition: 'Less than 3'
 			},
 			computed: {
+				computedResult: function() {
+					console.log('Computed result called');
+					return this.counter > 3 ? 'Greater than 3' : 'Less than 3';
+				}
 			},
-			methods: {}
+			methods: {
+				add: function() {
+					this.counter++;
+					//this.condition = this.counter > 3 ? 'Greater than 3' : 'Less than 3';
+				},
+				sub: function() {
+					this.counter--;
+					//this.condition = this.counter > 3 ? 'Greater than 3' : 'Less than 3';
+				},
+				result: function() {
+					console.log('Result called');
+					return this.counter > 3 ? 'Greater than 3' : 'Less than 3';
+				}
+			}
 		})
 
 	</script>
