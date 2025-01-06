@@ -9,51 +9,53 @@
 <body>
 
 	<div id="app">
+
+		<h2>{{ title }}</h2>
+		<h3>{{ newField }}</h3>
 		
-		<h2>Counter {{ counter }} \ {{ counter2 }}</h2>
-		<h3>Result: {{ result() }}</h3>
-		<h3>Computed result: {{ computedResult }}</h3>
-		
-		<button @click="add">Add</button>
-		<button @click="sub">Sub</button>
-		<button @click="counter2++">Add counter 2</button>
-		<button @click="counter2--">Sub counter 2</button>
-		
+		<button @click="title = 'Updated title'">Update title</button>
+
 	</div>
 
+	<hr>
+	
+	<div id="app2">
+		<h2>{{ title }}</h2>
+		<button @click="updateFirstTitle">Update title</button>
+	</div>
+	
 	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
 	<script>
 
-		new Vue({
+		var vue1 = new Vue({
 			el: '#app',
 			data: {
-				counter: 0,
-				counter2: 0,
-				condition: 'Less than 3'
-			},
-			computed: {
-				computedResult: function() {
-					console.log('Computed result called');
-					return this.counter > 3 ? 'Greater than 3' : 'Less than 3';
-				}
+				title: 'Hello I am Vue!'
 			},
 			methods: {
-				add: function() {
-					this.counter++;
-					//this.condition = this.counter > 3 ? 'Greater than 3' : 'Less than 3';
-				},
-				sub: function() {
-					this.counter--;
-					//this.condition = this.counter > 3 ? 'Greater than 3' : 'Less than 3';
-				},
-				result: function() {
-					console.log('Result called');
-					return this.counter > 3 ? 'Greater than 3' : 'Less than 3';
+				alertFast: function() {
+					alert('I am from Vue!');
 				}
+			}
+		})
+		
+		console.log(vue1);
+		
+		vue1.newField = 'New field random text';
+		
+		new Vue({
+			el: '#app2',
+			data: {
+				title: 'Hello from Vue 2!'
 			},
-			watch: {
-				counter: function (val) {
-					console.log('From watch object', val);
+			methods: {
+				updateFirstTitle: function() {
+					vue1.title = 'Updated title from Vue 2!',
+					vue1.newField = 'New field updated from Vue 2',
+					
+					setTimeout(() => {
+						vue1.alertFast();
+					}, 1000);
 				}
 			}
 		})
