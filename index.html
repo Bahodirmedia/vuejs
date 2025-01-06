@@ -9,52 +9,34 @@
 <body>
 
 	<div id="app">
-		<h2>{{ title }}</h2>
-		
-		<button @click="title = 'Changed title'">Change</button>
-		<button @click="doDestroy">Destroy</button>
+		<my-counter v-for="counters in 5"></my-counter>
 	</div>
-	
+
 	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
 	<script>
 
-		new Vue({
-			el: '#app',
-			data: {
-				title: 'Hello I am Vue!'
-			},
-			beforeCreate: function () {
-				console.log('Before Create');
-			},
-			created: function () {
-				console.log('Created');
-			},
-			beforeMount: function () {
-				console.log('Before Mount');
-			},
-			mounted: function () {
-				console.log('Mounted');
-			},
-			beforeUpdate: function () {
-				console.log('Before Update');
-			},
-			updated: function () {
-				console.log('Updated');
-			},
-			beforeDestroy: function () {
-				console.log('Before Destroy');
-			},
-			destroyed: function () {
-				console.log('Destroyed');
+		Vue.component('my-counter', {
+			template: `
+				<div style="border: 2px solid black; padding: 10px; margin-bottom: 10px;">
+					<h2>Counter: {{ counter }}</h2>
+					<button @click="add">Add to counter</button>
+				</div>
+			`,
+			data: function() {
+				return {
+					counter: 0
+				}
 			},
 			methods: {
-				doDestroy: function () {
-					this.$destroy();
+				add: function() {
+					this.counter++;
 				}
 			}
 		})
-		
-		
+
+		new Vue({
+			el: '#app',
+		})
 
 	</script>
 </body>
