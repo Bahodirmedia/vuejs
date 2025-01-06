@@ -9,53 +9,24 @@
 <body>
 
 	<div id="app">
-
-		<h2>{{ title }}</h2>
-		<h3>{{ newField }}</h3>
-		
-		<button @click="title = 'Updated title'">Update title</button>
-
-	</div>
-
-	<hr>
-	
-	<div id="app2">
-		<h2>{{ title }}</h2>
+		<h2 ref="heading">{{ title }}</h2>
 		<button @click="updateFirstTitle">Update title</button>
+		<hr ref="hrLine">	
 	</div>
 	
 	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
 	<script>
 
-		var vue1 = new Vue({
+		new Vue({
 			el: '#app',
 			data: {
 				title: 'Hello I am Vue!'
 			},
 			methods: {
-				alertFast: function() {
-					alert('I am from Vue!');
-				}
-			}
-		})
-		
-		console.log(vue1);
-		
-		vue1.newField = 'New field random text';
-		
-		new Vue({
-			el: '#app2',
-			data: {
-				title: 'Hello from Vue 2!'
-			},
-			methods: {
 				updateFirstTitle: function() {
-					vue1.title = 'Updated title from Vue 2!',
-					vue1.newField = 'New field updated from Vue 2',
-					
-					setTimeout(() => {
-						vue1.alertFast();
-					}, 1000);
+					this.title = 'Hello I am updated Vue!',
+					this.$refs.heading.style.color = 'red';
+					console.log(this.$refs);
 				}
 			}
 		})
