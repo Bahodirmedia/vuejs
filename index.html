@@ -9,17 +9,19 @@
 <body>
 
 	<div id="app">
-		<my-counter v-for="counters in 5"></my-counter>
+		<my-counter v-for="counters in 2"></my-counter>
+	</div>
+	
+	<hr>
+	
+	<div id="app2">
+		<my-counter-new v-for="counters in 2"></my-counter-new>
 	</div>
 
 	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
 	<script>
 		
-		var dataObj = {
-			counter: 0
-		}
-		
-		Vue.component('my-counter', {
+		var component = {
 			template: `
 				<div style="border: 2px solid black; padding: 10px; margin-bottom: 10px;">
 					<h2>Counter: {{ counter }}</h2>
@@ -36,10 +38,19 @@
 					this.counter++;
 				}
 			}
-		})
-
+		}
 		new Vue({
 			el: '#app',
+			components: {
+				'my-counter': component
+			}
+		})
+		
+		new Vue({
+			el: '#app2',
+			components: {
+				'my-counter-new': component
+			}
 		})
 
 	</script>
